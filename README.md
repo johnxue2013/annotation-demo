@@ -182,6 +182,13 @@ public class IndexController {
 ```  
 > 说明：结果文件中的第二条是另一个WeChatController中的  
 
+## 不满足于导出结果到文件?
+导出到文件只是一个简单的demo，你可以只需要编写少量的代码就可定制结果导出的位置。
+最简单的就是继承自`com.johnxue.common.authority.DefaultAuthorityAdapter`并重写
+`protected boolean doExport(List<AuthorityInfo> authorityInfos)`，实现你自己的逻辑。如导出到数据库或导出
+到excel。
+
+
 ## 写在最后  
 水平有限，如发现问题，及时[提bug][1]  
 
