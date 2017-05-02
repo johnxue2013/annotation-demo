@@ -42,7 +42,7 @@ mvn clean install
 
 ```  
    
-## 如何将此注解集成进其他spring项目  
+## 将此注解集成进其他spring项目?  
 1. clone此项目
 ```bash
 # git clone https://github.com/johnxue2013/annotation-demo.git
