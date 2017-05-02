@@ -102,7 +102,7 @@ mvn clean install
 </bean>
 ```
 
-做完上述操作后，在任意想要导出的Controller中的action上添加`@Authrory(description=<说明>)`就可以了,在项目启动，
+做完上述操作后，在任意想要导出的Controller中的action上添加`@Authrory(description=<说明>)`,启动项目，
 调用暴露出的接口，程序将自动解析此注解，调用相应接口就可以导出到文件。
 
 > `@Authrory(description=<说明>)` 中的<说明>请替换成有实际意义的值。
@@ -172,7 +172,7 @@ public class IndexController {
 }
 
 ```  
-启动tomcat，访问http://<host>:<port>/<project-name>/indexController/demo 即可。
+启动tomcat，访问`http://<host>:<port>/<project-name>/indexController/demo` 即可。
 
 最终可查看导出的文件得到内容如下
 ``` 
