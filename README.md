@@ -1,3 +1,4 @@
+![MIT Licence](https://travis-ci.org/johnxue2013/annotation-demo.svg?branch=master)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 # 自定义注解在spring中的使用demo
 有些时候spring提供的注解不能满足需求时，需要自定义注解。如提取项目中所有action，并标明其意义。此demo演示在spring中如何自定义注解，并如何解析自定义的注解。
