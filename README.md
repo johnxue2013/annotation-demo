@@ -45,9 +45,11 @@ mvn clean install
 ```  
    
 ## 将此注解集成进其他spring项目?  
-1. clone此项目
+1. clone此项目并编译
 ```bash
 # git clone https://github.com/johnxue2013/annotation-demo.git
+# cd annotation-demo/common-util
+# mvn clean install
 
 ```
 2. 基本配置
