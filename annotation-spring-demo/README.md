@@ -1,0 +1,167 @@
+![Build Status](https://travis-ci.org/johnxue2013/annotation-spring-demo.svg?branch=master)
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
+# 自定义注解在spring中的使用demo
+有些时候spring提供的注解不能满足需求时，需要自定义注解。如提取项目中所有action，并标明其意义。
+
+## 使用方法
+因为我没有自己的maven私服，加上自己比较懒，所以我没有研究怎么将开发好的jar包发布到maven的公共仓库中
+so，就按照下面的步骤来吧。  
+1. clone下common-util的项目
+依次执行下面的三行命令
+```bash
+# git clone https://github.com/johnxue2013/common-util.git
+# cd common-util
+# mvn clean install
+```
+等待命令行输出BUILD SUCCESS字样，失败请检查是否maven版本过低,或者[提issue][1]
+
+2. 在Spring项目中使用本项目  
+
+首先，如果项目是使用maven进行管理的，则修改项目的pom.xml文件。
+在`<dependencies>`标签下添加如下内容
+```xml
+<dependency>
+    <groupId>com.johnxue.common</groupId>
+    <artifactId>common-util</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <exclusions>
+        <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </exclusion>
+        <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </exclusion>
+
+        <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </exclusion>
+
+        <exclusion>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+```
+如果不是则找到上一步输出的jar或者直接[下载jar包][2]，扔到项目的lib目录下
+
+
+配置好依赖后,修改spring的配置文件，如本demo中的配置文件是applicationContext.xml。添加
+如下配置
+```xml
+<bean class="com.johnxue.common.config.AuthorityConfig">
+    <property name="basePackages">
+        <list>
+            <value>com.izhiqu.controller</value>
+        </list>
+    </property>
+    <property name="destination">
+        <value>/Users/johnxue/Desktop/out.txt</value>
+    </property>
+</bean>
+
+<bean class="com.johnxue.common.authority.DefaultAuthorityAdapter"/>
+```
+
+做完上述操作后，在任意想要导出的Controller中的action上添加`@Authrory(description=<说明>)`就可以了,在项目启动，
+调用暴露出的接口，程序将自动解析此注解，并可以导出到文件。
+
+> `@Authrory(description=<说明>)` 中的<说明>请替换成有实际意义的值。
+
+
+> 示例如下: 修改或新增任意一个controller，在controller中调用暴露出的接口。
+for example
+```java
+package com.izhiqu.controller;
+
+import com.johnxue.common.annotation.Authority;
+import com.johnxue.common.authority.IAuthority;
+import com.johnxue.common.bean.AuthorityInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 示例controller
+ *
+ * @author han.xue
+ * @since 2017-04-30 19:49:40
+ */
+@Controller
+@RequestMapping("indexController")
+public class IndexController {
+
+    /**
+     * 注入提供的类
+     */
+    @Autowired
+    private IAuthority authority;
+
+    @Authority(description = "这是一个测试的http接口")
+    @RequestMapping("test")
+    @ResponseBody
+    public List<String> test() {
+        List<String> list = new ArrayList<>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        return list;
+    }
+
+
+    @RequestMapping("demo")
+    @ResponseBody
+    public void demo() {
+
+
+        //获取所有controller中使用@Authority注解的接口
+        List<AuthorityInfo> allAuthority = authority.getAllAuthority();
+        System.out.println("---------------------------------------------------");
+        //打印到控制台
+        System.out.println(allAuthority);
+        //调用提供的服务，导出到文件,导出的位置取决于具体的配置,具体可参考applicationContext.xml
+        //中的配置
+        boolean export = authority.export();
+        System.out.println(export);
+        System.out.println("---------------------------------------------------");
+    }
+
+}
+
+```  
+启动tomcat，访问http://localhost:8080/annotation-spring-demo/indexController/demo 即可。
+
+最终可查看导出的文件得到内容如下
+``` 
+[description=这是一个测试的http接口,url=/indexController/test,method=GET/POST]
+[description=微信后台调用使用,url=/wx,method=GET]
+
+```  
+> 说明：结果文件中的第二条是另一个WeChatController中的  
+
+## 写在最后  
+不想配置项目?直接[下载编译好的压缩包][3]，解压后，修改输出文件位置，放入tomcat的webapps下启动tomcat,
+直接接访问http://localhost:8080/annotation-spring-demo/indexController/demo 即可
+
+> 由于水平有限，如发现bug，欢迎[提bug][1]  
+
+
+
+
+[1]:https://github.com/johnxue2013/annotation-spring-demo/issues/new "提bug的超链接"
+[2]:https://github.com/johnxue2013/common-util/releases/download/v1.0/common-util.jar "jar包下载"
+[3]:https://github.com/johnxue2013/annotation-spring-demo/releases/download/v1.0/annotation-spring-demo.zip "annotation-spring-demo发布包下载"
+
+
+
+
+
+
+
