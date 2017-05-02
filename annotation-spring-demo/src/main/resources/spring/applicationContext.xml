@@ -14,6 +14,7 @@
             </list>
         </property>
         <property name="destination">
+            <!--修改成本地实际存在路径，文件可以不存在，只要根路径存在就行-->
             <value>D:\\api.txt</value>
         </property>
     </bean>
