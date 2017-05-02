@@ -49,8 +49,7 @@ public class IndexController {
         System.out.println("---------------------------------------------------");
         //打印到控制台
         System.out.println(allAuthority);
-        //调用提供的服务，导出到文件,导出的位置取决于具体的配置,具体可参考applicationContext.xml
-        //中的配置
+        //调用提供的服务，导出到文件,导出的位置取决于具体的配置,具体可参考applicationContext.xml中的配置
         boolean export = authority.export();
         System.out.println(export);
         System.out.println("---------------------------------------------------");

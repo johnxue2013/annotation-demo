@@ -63,12 +63,13 @@ public class DefaultAuthorityAdapter extends AbstractAuthority {
                     }
 
                     String description = null;
-                    try {
-                        description = new String(authority.description().getBytes(), "UTF-8");
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        description = new String(authority.description().getBytes(), "UTF-8");
+//                    } catch (UnsupportedEncodingException e) {
+//                        e.printStackTrace();
+//                    }
 
+                    description =authority.description();
                     authorityInfo.setDescription(description);
 
                     result.add(authorityInfo);
