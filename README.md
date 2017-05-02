@@ -104,6 +104,9 @@ mvn clean install
         <value>D:\\api.txt</value>
     </property>
 </bean>
+
+<bean class="com.johnxue.common.authority.DefaultAuthorityAdapter"/>
+
 ```
 
 做完上述操作后，在任意想要导出的Controller中的action上添加`@Authrory(description=<说明>)`,启动项目，
