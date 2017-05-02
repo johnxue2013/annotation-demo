@@ -182,17 +182,14 @@ public class IndexController {
 > 说明：结果文件中的第二条是另一个WeChatController中的  
 
 ## 写在最后  
-不想配置项目?直接[下载编译好的压缩包][3]，解压后，修改输出文件位置，放入tomcat的webapps下启动tomcat,
-直接接访问http://localhost:8080/annotation-spring-demo/indexController/demo 即可
+水平有限，如发现问题，及时[提bug][1]  
 
-> 水平有限，如发现问题，及时[提bug][1]  
 
 
 
 
 [1]:https://github.com/johnxue2013/annotation-demo/issues "提bug的超链接"
-[2]:https://github.com/johnxue2013/common-util/releases/download/v1.0/common-util.jar "jar包下载"
-[3]:https://github.com/johnxue2013/annotation-spring-demo/releases/download/v1.0/annotation-spring-demo.zip "annotation-spring-demo发布包下载"
+
 
 
 
