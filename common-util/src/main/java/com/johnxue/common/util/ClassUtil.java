@@ -1,14 +1,14 @@
 package com.johnxue.common.util;
 
-import com.google.common.base.Preconditions;
-import com.johnxue.common.config.AuthorityConfig;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.common.base.Preconditions;
+import com.johnxue.common.config.AuthorityConfig;
 
 /**
  * class util
@@ -60,9 +60,9 @@ public class ClassUtil
 	/**
 	 * 获取所有文件列表
 	 *
-	 * @param rootFile
-	 * @param fileList
-	 * @throws IOException
+	 * @param rootFile 需要遍历的文件
+	 * @param fileList 结果集
+	 * @throws IOException 文件不存在时抛出此exception
 	 */
 	private static List<String> listFiles(File rootFile, List<String> fileList) throws IOException
 	{

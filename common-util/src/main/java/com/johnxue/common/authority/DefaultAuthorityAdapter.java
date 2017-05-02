@@ -1,14 +1,14 @@
 package com.johnxue.common.authority;
 
-import com.johnxue.common.annotation.Authority;
-import com.johnxue.common.bean.AuthorityInfo;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.johnxue.common.annotation.Authority;
+import com.johnxue.common.bean.AuthorityInfo;
 
 /**
  * @author han.xue
@@ -62,14 +62,14 @@ public class DefaultAuthorityAdapter extends AbstractAuthority {
                         authorityInfo.setUrl(parentUrl + method.getName());
                     }
 
-                    String description = null;
+//                    String description = null;
 //                    try {
 //                        description = new String(authority.description().getBytes(), "UTF-8");
 //                    } catch (UnsupportedEncodingException e) {
 //                        e.printStackTrace();
 //                    }
 
-                    description =authority.description();
+                    String description =authority.description();
                     authorityInfo.setDescription(description);
 
                     result.add(authorityInfo);

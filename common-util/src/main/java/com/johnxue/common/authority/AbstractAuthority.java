@@ -1,12 +1,5 @@
 package com.johnxue.common.authority;
 
-import com.google.common.base.Preconditions;
-import com.google.common.io.Files;
-import com.johnxue.common.bean.AuthorityInfo;
-import com.johnxue.common.config.AuthorityConfig;
-import com.johnxue.common.util.ClassUtil;
-import org.springframework.stereotype.Controller;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -14,6 +7,14 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import org.springframework.stereotype.Controller;
+
+import com.google.common.base.Preconditions;
+import com.google.common.io.Files;
+import com.johnxue.common.bean.AuthorityInfo;
+import com.johnxue.common.config.AuthorityConfig;
+import com.johnxue.common.util.ClassUtil;
 
 /**
  * @author han.xue
@@ -81,9 +82,8 @@ public abstract class AbstractAuthority implements IAuthority {
     /**
      * filter
      *
-     * @param classes
-     * @param annotation
-     * @return
+     * @param classes class
+     * @param annotation 需要的注解，不是次注解的class将被过滤掉
      */
     private void filter(List<Class> classes, Class<? extends Annotation> annotation) {
         Iterator<Class> iterator = classes.iterator();
@@ -98,7 +98,7 @@ public abstract class AbstractAuthority implements IAuthority {
     /**
      * 具体获取权限信息交给子类去实现
      *
-     * @return
+     * @return List
      */
     protected abstract List<AuthorityInfo> doGetAuthorityInfo(List<Class> classes);
 
