@@ -25,6 +25,8 @@
     </property>
 </bean>
 
+<bean class="com.johnxue.common.authority.DefaultAuthorityAdapter"/>
+
 ```  
 3. 生成war包
 进入项目的根目录运行命令  
@@ -186,7 +188,26 @@ public class IndexController {
 导出到文件只是一个简单的demo，你可以只需要编写少量的代码就可定制结果导出的位置。
 最简单的就是继承自`com.johnxue.common.authority.DefaultAuthorityAdapter`并重写
 `protected boolean doExport(List<AuthorityInfo> authorityInfos)`，实现你自己的逻辑。如导出到数据库或导出
-到excel。
+到excel。  
+
+最后别忘记修改对应的spring配置文件。  
+```xml
+<bean class="com.johnxue.common.config.AuthorityConfig">
+    <property name="basePackages">
+        <list>
+            <value>com.izhiqu.controller</value>
+        </list>
+    </property>
+    <property name="destination">
+        <!--修改成本地实际存在路径，文件可以不存在，只要根路径存在就行-->
+        <value>D:\\api.txt</value>
+    </property>
+</bean>  
+
+<!--此处替换成你自己的实现类-->
+<bean class="com.XXX.XXX.XXX.YourAuthorityAdapter"/>
+
+```
 
 
 ## 写在最后  
