@@ -16,8 +16,11 @@ import com.johnxue.common.bean.AuthorityInfo;
  */
 public class DefaultAuthorityAdapter extends AbstractAuthority {
 
+
     @Override
     protected List<AuthorityInfo> doGetAuthorityInfo(List<Class> classes) {
+
+        //如果有需要可以考虑使用缓存，而不是每次都去load class，此处暂未使用缓存
         List<AuthorityInfo> result = new ArrayList<>();
         for (Class clazz : classes) {
 
