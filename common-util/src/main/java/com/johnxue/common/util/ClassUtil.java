@@ -18,7 +18,7 @@ import com.johnxue.common.config.AuthorityConfig;
  */
 public class ClassUtil
 {
-
+	// 临时路径
 	private static String tmpPath = "";
 
 	static
